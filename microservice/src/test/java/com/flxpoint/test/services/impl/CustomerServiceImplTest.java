@@ -2,6 +2,7 @@ package com.flxpoint.test.services.impl;
 
 import com.flxpoint.test.controllers.requests.CreateAddressRequest;
 import com.flxpoint.test.controllers.requests.CreateCustomerRequest;
+import com.flxpoint.test.controllers.requests.UpdateAddressRequest;
 import com.flxpoint.test.controllers.requests.UpdateCustomerRequest;
 import com.flxpoint.test.entities.Address;
 import com.flxpoint.test.entities.Customer;
@@ -119,7 +120,7 @@ public class CustomerServiceImplTest {
         // Given
         UpdateCustomerRequest request = new UpdateCustomerRequest();
         request.setId(1);
-        request.setAddress(new CreateAddressRequest());
+        request.setAddress(new UpdateAddressRequest());
 
         Customer existingCustomer = new Customer();
         existingCustomer.setAddress(new Address());

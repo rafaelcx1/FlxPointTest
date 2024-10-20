@@ -24,5 +24,5 @@ public class UpdateCustomerRequest {
     private String phoneNumber;
 
     @NotNull(message = "The field 'address' must not be null")
-    private CreateAddressRequest address;
+    private UpdateAddressRequest address;
 }
