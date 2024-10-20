@@ -1,0 +1,48 @@
+services:
+  microservice:
+    build:
+      context: ./microservice
+
+    depends_on:
+      crm:
+        condition: service_started
+      db:
+        condition: service_healthy
+
+    restart: unless-stopped
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_NAME: microservice
+      DATABASE_USER: microservice
+      DATABASE_PASSWORD: Microservice@123
+    ports:
+      - 8080:8080
+
+  crm:
+    build:
+      context: ./crm
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./crm:/usr/src/app
+    restart: unless-stopped
+
+  db:
+    restart: unless-stopped
+    image: postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB -h localhost" ]
+      interval: 10s
+      timeout: 15s
+      retries: 5
+    environment:
+      POSTGRES_DB: microservice
+      POSTGRES_USER: microservice
+      POSTGRES_PASSWORD: Microservice@123
+      PGDATA: /data/postgres
+    volumes:
+      - ./volumes/postgres:/data/postgres
+    ports:
+      - "5432:5432"
