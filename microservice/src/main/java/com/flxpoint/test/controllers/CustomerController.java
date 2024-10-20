@@ -9,7 +9,6 @@ import com.flxpoint.test.mappers.Mapper;
 import com.flxpoint.test.services.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedModel;
 import org.springframework.web.bind.annotation.*;

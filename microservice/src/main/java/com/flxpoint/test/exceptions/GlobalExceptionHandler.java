@@ -8,6 +8,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -15,10 +18,14 @@ public class GlobalExceptionHandler {
     public ProblemDetail methodArgumentNotValidException(MethodArgumentNotValidException ex) {
         ProblemDetail problemDetail = ProblemDetail.forStatus(400);
 
+        Map<String, Object> fieldErrors = new HashMap<>();
+
         ex.getBindingResult().getAllErrors().forEach(error -> {
             String fieldName = ((FieldError) error).getField();
-            problemDetail.setProperty(fieldName, error.getDefaultMessage());
+            fieldErrors.put(fieldName, error.getDefaultMessage());
         });
+
+        problemDetail.setProperty("errors", fieldErrors);
 
         return problemDetail;
     }

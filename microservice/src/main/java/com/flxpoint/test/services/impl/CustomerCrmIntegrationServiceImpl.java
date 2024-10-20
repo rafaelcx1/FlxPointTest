@@ -18,7 +18,7 @@ public class CustomerCrmIntegrationServiceImpl implements CustomerCrmIntegration
     private final CustomerCrmIntegration customerCrmIntegration;
 
     @Async
-    @Retryable(maxAttempts = 20, backoff = @Backoff(delay = 1000, multiplier = 2))
+    @Retryable(maxAttempts = Integer.MAX_VALUE, backoff = @Backoff(delay = 1000, multiplier = 2, maxDelay = 20_000))
     public void create(CustomerCrm customerCrm) {
         String customerId = customerCrm.getId();
 
@@ -33,7 +33,7 @@ public class CustomerCrmIntegrationServiceImpl implements CustomerCrmIntegration
     }
 
     @Async
-    @Retryable(maxAttempts = 20, backoff = @Backoff(delay = 1000, multiplier = 2))
+    @Retryable(maxAttempts = Integer.MAX_VALUE, backoff = @Backoff(delay = 1000, multiplier = 2, maxDelay = 20_000))
     public void update(CustomerCrm customerCrm) {
         String customerId = customerCrm.getId();
 
@@ -48,7 +48,7 @@ public class CustomerCrmIntegrationServiceImpl implements CustomerCrmIntegration
     }
 
     @Async
-    @Retryable(maxAttempts = 20, backoff = @Backoff(delay = 1000, multiplier = 2))
+    @Retryable(maxAttempts = Integer.MAX_VALUE, backoff = @Backoff(delay = 5_000, multiplier = 2, maxDelay = 20_000))
     public void delete(Integer customerId) {
         try {
             log.info("Deleting customer (id: {}) in CRM", customerId);

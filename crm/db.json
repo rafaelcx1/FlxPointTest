@@ -1,3 +1,18 @@
 {
-  "customers": []
+  "customers": [
+    {
+      "id": "34",
+      "fullName": "null Test",
+      "contactEmail": "customer1@test.com",
+      "primaryPhone": "+5512997773767",
+      "location": "Street Test, City Test, State Test, ZipCode Test"
+    },
+    {
+      "id": "35",
+      "fullName": " Test",
+      "contactEmail": "customer1@test.com",
+      "primaryPhone": "+5512997773767",
+      "location": "Street Test, City Test, State Test, ZipCode Test"
+    }
+  ]
 }
